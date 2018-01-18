@@ -5,8 +5,11 @@
             {
                 "targets": {
                     "node": true
-                }
+                },
+                "useBuiltIns": true
             }
-        ]
-    ]
+        ],
+        "flow"
+    ],
+    "plugins": ["transform-decorators-legacy"]
 }

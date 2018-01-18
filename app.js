@@ -12,13 +12,18 @@ import koaStatic from 'koa-static2';
 import cors from 'koa2-cors';
 import convert from 'koa-convert';
 import views from 'koa-views';
-import config from './config';
+import 'reflect-metadata';
+import { createKoaServer } from 'routing-controllers';
 
-import routers from './routers';
+import config from './config';
+import Controllers from './controllers';
 
 const logger = log4js.getLogger('app');
 
-const app = new Koa();
+//初始化koa
+const app = createKoaServer({
+    controllers: Controllers.init()
+});
 
 //配置日志中间件
 app.use(log4js.koaLogger(log4js.getLogger('http'), { level: 'auto' }));
@@ -46,9 +51,6 @@ app.use(
         extension: 'html'
     })
 );
-
-// 初始化路由中间件
-app.use(routers.routes()).use(routers.allowedMethods());
 
 // 监听启动端口
 app.listen(config.PORT);

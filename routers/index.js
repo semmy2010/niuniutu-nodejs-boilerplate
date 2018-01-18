@@ -1,5 +1,0 @@
-/**
- * @author Semmy
- *
- * @flow
- */

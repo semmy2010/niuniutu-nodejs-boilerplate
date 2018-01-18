@@ -3,20 +3,13 @@
  *
  * @flow
  */
+import { ENV_CONSTANT } from './env-constant';
 
 // 环境常量:DEBUG RELEASE
-const ENV = 'DEBUG';
+const ENV = ENV_CONSTANT.ENV.DEBUG;
 
-export const constant = {
-    PORT: {
-        DEBUG: 3000,
-        RELEASE: 3000
-    }
+const CONFIG = {
+    IS_PRODUCTION_ENV: ENV === ENV_CONSTANT.ENV.RELEASE,
+    PORT: ENV_CONSTANT.PORT[ENV]
 };
-
-const config = {
-    IS_PRODUCTION_ENV: ENV === 'RELEASE',
-    PORT: constant.PORT[ENV]
-};
-
-export default config;
+export default CONFIG;
