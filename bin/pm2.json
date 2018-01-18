@@ -1,0 +1,22 @@
+{
+  "apps": [
+    {
+      "name": "niuniutu",
+      "script": "../app.js", // 实际启动脚本
+      "cwd": "./",
+      "instances": "max",
+      "exec_mode": "cluster",
+      "watch": true,
+      "max_memory_restart": "1G",
+      "ignore_watch": ["node_modules", "logs", "public"],
+      "watch_options": {
+        "followSymlinks": false
+      },
+      "error_file": "../logs/niuniutu-pm2-err.log", // 错误日志路径
+      "out_file": "../logs/niuniutu-pm2-out.log", // 普通日志路径
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  ]
+}

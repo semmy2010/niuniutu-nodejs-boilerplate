@@ -1,0 +1,6 @@
+.vscode
+.idea
+.project
+package-lock.json
+node_modules
+logs
