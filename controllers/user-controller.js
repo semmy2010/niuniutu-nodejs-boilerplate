@@ -3,7 +3,7 @@
  *
  * @flow
  */
-import { Controller, Param, Body, Get, Post, Put, Delete } from 'routing-controllers';
+import { Ctx, Controller, JsonController, Param, QueryParam, Body, Get, Post, Put, Delete } from 'routing-controllers';
 
 @Controller()
 export default class UserController {
@@ -20,16 +20,17 @@ export default class UserController {
 
     @Post('/users')
     post(@Body() user: any) {
+        console.log(user);
         return 'Saving user...';
     }
 
     @Put('/users/:id')
     put(@Param('id') id: number, @Body() user: any) {
-        return 'Updating a user...';
+        return 'Updating a user...#' + id;
     }
 
     @Delete('/users/:id')
     remove(@Param('id') id: number) {
-        return 'Removing user...';
+        return 'Removing user...#' + id;
     }
 }
