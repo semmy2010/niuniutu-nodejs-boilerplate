@@ -3,19 +3,30 @@
  *
  * @flow
  */
-import { Ctx, Controller, JsonController, Param, QueryParam, Body, Get, Post, Put, Delete } from 'routing-controllers';
+import { Render, Ctx, Controller, JsonController, Param, QueryParam, Body, Get, Post, Put, Delete } from 'routing-controllers';
+import { Container, Inject, Service } from 'typedi';
+
+const t = 'ttt';
 
 @Controller()
 export default class UserController {
+    constructor(userServices: UserService) {
+        this.userServices = userServices;
+    }
+
+    @Render('test.html')
     @Get('/users')
     getAll() {
+        console.log('getAll', this.userServices);
         return 'This action returns all users';
     }
 
     @Get('/users/:id')
-    getOne(@Param('id') id: number) {
-        console.log(id);
-        return 'This action returns user #' + id;
+    @Param('id')
+    getOne(id: number) {
+        console.log('getOne', id);
+        return 'addddasdf';
+        // return { id: id, title: '这是title' };
     }
 
     @Post('/users')

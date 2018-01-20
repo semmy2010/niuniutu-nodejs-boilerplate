@@ -15,10 +15,11 @@ import convert from 'koa-convert';
 import views from 'koa-views';
 import 'reflect-metadata';
 // import 'es7-reflect-metadata';
-import { createKoaServer, useKoaServer } from 'routing-controllers';
-
+import { createKoaServer, useKoaServer, useContainer } from 'routing-controllers';
+import { Container } from 'typedi';
 import config from './config';
 
+useContainer(Container);
 const logger = log4js.getLogger('app');
 
 //初始化koa
@@ -46,14 +47,15 @@ app.use(bodyParser());
 // );
 
 // 配置静态资源加载中间件
-// app.use(convert(koaStatic(path.join(__dirname, './public'))));
+app.use(convert(koaStatic(path.join(__dirname, './public'))));
 
-// 配置服务端模板渲染引擎中间件
-// app.use(
-//     views(path.join(__dirname, './views'), {
-//         extension: 'html'
-//     })
-// );
+// 配置服务端模板渲染引擎中间件;
+app.use(
+    views(path.join(__dirname, './views'), {
+        map: { html: 'ejs' },
+        extension: 'html'
+    })
+);
 
 // 监听启动端口
 app.listen(config.PORT);
