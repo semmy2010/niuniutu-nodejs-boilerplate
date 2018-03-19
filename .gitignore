@@ -3,5 +3,5 @@
 .project
 package-lock.json
 node_modules
+dist
 logs
-typings
